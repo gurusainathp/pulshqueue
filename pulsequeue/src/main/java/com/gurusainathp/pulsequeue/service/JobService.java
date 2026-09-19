@@ -40,9 +40,10 @@ public class JobService {
         jobRepository.save(job);
     }
 
-    public void startJob(Job job) {
+    public void startJob(Job job, UUID workerId) {
         job.setStatus(Status.PROCESSING);
         job.setStartedAt(new Timestamp(System.currentTimeMillis()));
+        job.setWorkerId(workerId);
         updateJob(job);
     }
 

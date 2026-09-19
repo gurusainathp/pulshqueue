@@ -97,4 +97,8 @@ public class Job {
     public void setAttempts(int attempts) {
         this.attempts = attempts;
     }
+
+    public void setWorkerId(UUID workerId) {
+        this.workerId = workerId;
+    }
 }

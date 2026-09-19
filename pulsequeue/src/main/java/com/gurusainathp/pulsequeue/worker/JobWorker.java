@@ -4,18 +4,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import com.gurusainathp.pulsequeue.service.JobService;
 import com.gurusainathp.pulsequeue.model.Job;
-import com.gurusainathp.pulsequeue.model.Status;
-import java.sql.Timestamp;
 import java.util.UUID;
 
 import org.springframework.scheduling.annotation.Scheduled;
 
 @Component
 public class JobWorker {
+    private final UUID workerId;
     private final JobService jobService;
     private final StringRedisTemplate redisTemplate;
 
     public JobWorker(JobService jobService, StringRedisTemplate redisTemplate) {
+        this.workerId = UUID.randomUUID();
         this.jobService = jobService;
         this.redisTemplate = redisTemplate;
     }
@@ -26,7 +26,7 @@ public class JobWorker {
         if (jobIdStr != null) {
             Job job = jobService.getJobById(UUID.fromString(jobIdStr));
             if (job != null) {
-                jobService.startJob(job);
+                jobService.startJob(job, workerId);
             }
             // Simulate job processing
             try {
