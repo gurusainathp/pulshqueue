@@ -51,6 +51,7 @@ public class JobService {
         job.setStatus(Status.COMPLETED);
         job.setCompletedAt(new Timestamp(System.currentTimeMillis()));
         job.setResult("Job completed successfully");
+        job.setError(null);
         updateJob(job);
     }
 
@@ -58,6 +59,12 @@ public class JobService {
         job.setStatus(Status.FAILED);
         job.setError(error);
         job.setAttempts(job.getAttempts() + 1);
+        if (job.getAttempts() < 3) {
+            job.setStatus(Status.QUEUED);
+            jobQueueService.enqueueJob(job.getId());
+        } else {
+            job.setError("Failed permananently");
+        }
         updateJob(job);
     }
 }

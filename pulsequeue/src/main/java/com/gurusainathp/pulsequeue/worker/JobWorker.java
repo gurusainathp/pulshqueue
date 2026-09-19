@@ -38,6 +38,13 @@ public class JobWorker {
                 }
                 return;
             }
+            // Random failure
+            if (Math.random() < 0.7) { // 70% chance of failure
+                if (job != null) {
+                    jobService.failJob(job, "Random failure occurred");
+                }
+                return;
+            }
             if (job != null) {
                 jobService.completeJob(job);
             }
