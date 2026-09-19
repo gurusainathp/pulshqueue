@@ -1,5 +1,4 @@
 package com.gurusainathp.pulsequeue.dto;
 
-public class CreateJobRequest {
-    
+public record CreateJobRequest(String type) {
 }

@@ -1,6 +1,8 @@
 package com.gurusainathp.pulsequeue.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import java.util.UUID;
 import java.sql.Timestamp;
@@ -10,6 +12,7 @@ public class Job {
     @Id
     private UUID id;
     private String type;
+    @Enumerated(EnumType.ORDINAL)
     private Status status;
     private Timestamp createdAt;
     private Timestamp startedAt;
@@ -29,5 +32,13 @@ public class Job {
     public Job(String type) {
         this();
         this.type = type;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getType() {
+        return type;
     }
 }
