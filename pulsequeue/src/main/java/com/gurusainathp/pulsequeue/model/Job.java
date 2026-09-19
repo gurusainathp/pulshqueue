@@ -41,4 +41,36 @@ public class Job {
     public String getType() {
         return type;
     }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public Timestamp getStartedAt() {
+        return startedAt;
+    }
+
+    public Timestamp getCompletedAt() {
+        return completedAt;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public int getAttempts() {
+        return attempts;
+    }
+
+    public UUID getWorkerId() {
+        return workerId;
+    }
 }
