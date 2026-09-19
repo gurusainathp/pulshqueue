@@ -25,4 +25,8 @@ public class JobService {
     public Job getJobById(UUID id) {
         return jobRepository.findById(id).orElse(null);
     }
+
+    public Iterable<Job> getAllJobs() {
+        return jobRepository.findAll();
+    }
 }

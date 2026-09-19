@@ -36,6 +36,12 @@ public class PulsequeueController {
         }
     }
 
+    @GetMapping("/jobs")
+    public ResponseEntity<Iterable<Job>> getAllJobs() {
+        Iterable<Job> jobs = jobService.getAllJobs();
+        return ResponseEntity.ok(jobs);
+    }
+
     @PostMapping("/jobs")
     public ResponseEntity<Job> createJob(@RequestBody CreateJobRequest request) {
         Job job = jobService.createJob(request);
