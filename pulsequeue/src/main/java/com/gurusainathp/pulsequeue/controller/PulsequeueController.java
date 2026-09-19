@@ -1,4 +1,4 @@
-package com.gurusainathp.pulsequeue;
+package com.gurusainathp.pulsequeue.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
