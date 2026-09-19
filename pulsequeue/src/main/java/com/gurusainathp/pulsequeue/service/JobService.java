@@ -5,6 +5,8 @@ import com.gurusainathp.pulsequeue.Repository.JobRepository;
 import com.gurusainathp.pulsequeue.dto.CreateJobRequest;
 import com.gurusainathp.pulsequeue.model.Job;
 import java.util.UUID;
+import java.sql.Timestamp;
+import com.gurusainathp.pulsequeue.model.Status;
 
 @Service
 public class JobService {
@@ -36,5 +38,25 @@ public class JobService {
 
     public void updateJob(Job job) {
         jobRepository.save(job);
+    }
+
+    public void startJob(Job job) {
+        job.setStatus(Status.PROCESSING);
+        job.setStartedAt(new Timestamp(System.currentTimeMillis()));
+        updateJob(job);
+    }
+
+    public void completeJob(Job job) {
+        job.setStatus(Status.COMPLETED);
+        job.setCompletedAt(new Timestamp(System.currentTimeMillis()));
+        job.setResult("Job completed successfully");
+        updateJob(job);
+    }
+
+    public void failJob(Job job, String error) {
+        job.setStatus(Status.FAILED);
+        job.setError(error);
+        job.setAttempts(job.getAttempts() + 1);
+        updateJob(job);
     }
 }

@@ -85,4 +85,16 @@ public class Job {
     public void setCompletedAt(Timestamp completedAt) {
         this.completedAt = completedAt;
     }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public void setAttempts(int attempts) {
+        this.attempts = attempts;
+    }
 }

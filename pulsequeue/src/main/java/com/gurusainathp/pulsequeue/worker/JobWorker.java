@@ -26,20 +26,20 @@ public class JobWorker {
         if (jobIdStr != null) {
             Job job = jobService.getJobById(UUID.fromString(jobIdStr));
             if (job != null) {
-                job.setStatus(Status.PROCESSING);
-                job.setStartedAt(new Timestamp(System.currentTimeMillis()));
-                jobService.updateJob(job);
+                jobService.startJob(job);
             }
             // Simulate job processing
             try {
                 Thread.sleep(20000); // Simulate processing time
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+                if (job != null) {
+                    jobService.failJob(job, "Job processing interrupted");
+                }
+                return;
             }
             if (job != null) {
-                job.setStatus(Status.COMPLETED);
-                job.setCompletedAt(new Timestamp(System.currentTimeMillis()));
-                jobService.updateJob(job);
+                jobService.completeJob(job);
             }
         }
     }
