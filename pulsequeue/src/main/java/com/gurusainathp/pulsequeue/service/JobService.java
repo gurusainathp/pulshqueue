@@ -9,14 +9,17 @@ import java.util.UUID;
 @Service
 public class JobService {
     private final JobRepository jobRepository;
+    private final JobQueueService jobQueueService;
 
-    public JobService(JobRepository jobRepository) {
+    public JobService(JobRepository jobRepository, JobQueueService jobQueueService) {
         this.jobRepository = jobRepository;
+        this.jobQueueService = jobQueueService;
     }
-    
+
     public Job createJob(CreateJobRequest request) {
-        Job job = new Job(request.type());
-        return jobRepository.save(job);
+        Job job = jobRepository.save(new Job(request.type()));
+        jobQueueService.enqueueJob(job.getId());
+        return job;
     }
 
     public Job getJobById(UUID id) {
