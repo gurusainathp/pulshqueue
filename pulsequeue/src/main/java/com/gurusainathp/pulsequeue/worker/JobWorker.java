@@ -8,6 +8,8 @@ import com.gurusainathp.pulsequeue.model.Status;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import org.springframework.scheduling.annotation.Scheduled;
+
 @Component
 public class JobWorker {
     private final JobService jobService;
@@ -18,6 +20,7 @@ public class JobWorker {
         this.redisTemplate = redisTemplate;
     }
 
+    @Scheduled(fixedDelay = 10000)
     public void processJobs() {
         String jobIdStr = redisTemplate.opsForList().leftPop("job_queue");
         if (jobIdStr != null) {
