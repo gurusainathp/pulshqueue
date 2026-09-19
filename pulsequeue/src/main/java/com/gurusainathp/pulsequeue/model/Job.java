@@ -73,4 +73,16 @@ public class Job {
     public UUID getWorkerId() {
         return workerId;
     }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setStartedAt(Timestamp startedAt) {
+        this.startedAt = startedAt;
+    }
+
+    public void setCompletedAt(Timestamp completedAt) {
+        this.completedAt = completedAt;
+    }
 }

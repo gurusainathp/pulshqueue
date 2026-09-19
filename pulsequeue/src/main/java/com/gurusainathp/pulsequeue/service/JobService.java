@@ -33,4 +33,8 @@ public class JobService {
     public void deleteJob(Job job) {
         jobRepository.delete(job);
     }
+
+    public void updateJob(Job job) {
+        jobRepository.save(job);
+    }
 }
