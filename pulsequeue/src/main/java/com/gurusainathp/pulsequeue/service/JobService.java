@@ -29,4 +29,8 @@ public class JobService {
     public Iterable<Job> getAllJobs() {
         return jobRepository.findAll();
     }
+
+    public void deleteJob(Job job) {
+        jobRepository.delete(job);
+    }
 }

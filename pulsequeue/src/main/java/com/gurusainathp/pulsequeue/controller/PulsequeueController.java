@@ -2,6 +2,7 @@ package com.gurusainathp.pulsequeue.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,5 +47,16 @@ public class PulsequeueController {
     public ResponseEntity<Job> createJob(@RequestBody CreateJobRequest request) {
         Job job = jobService.createJob(request);
         return ResponseEntity.created(URI.create("/jobs/" + job.getId())).body(job);
+    }
+
+    @DeleteMapping("/jobs/{id}")
+    public ResponseEntity<Void> deleteJob(@PathVariable UUID id) {
+        Job job = jobService.getJobById(id);
+        if (job != null) {
+            jobService.deleteJob(job);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
