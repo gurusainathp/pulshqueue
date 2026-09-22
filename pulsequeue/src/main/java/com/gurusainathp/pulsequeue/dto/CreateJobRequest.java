@@ -1,4 +1,6 @@
 package com.gurusainathp.pulsequeue.dto;
 
-public record CreateJobRequest(String type) {
+import java.util.Map;
+
+public record CreateJobRequest(String type, Map<String, String> parameters) {
 }
