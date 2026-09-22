@@ -5,13 +5,22 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import java.util.UUID;
+
+import org.hibernate.annotations.JdbcTypeCode;
+
 import java.sql.Timestamp;
+import java.util.Map;
+import org.hibernate.type.SqlTypes;
+import jakarta.persistence.Column;
 
 @Entity
 public class Job {
     @Id
     private UUID id;
     private String type;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Map<String, String> parameters;
     @Enumerated(EnumType.ORDINAL)
     private Status status;
     private Timestamp createdAt;
@@ -29,9 +38,10 @@ public class Job {
         this.attempts = 0;
     }
 
-    public Job(String type) {
+    public Job(String type, Map<String, String> parameters) {
         this();
         this.type = type;
+        this.parameters = parameters;
     }
 
     public UUID getId() {
@@ -100,5 +110,9 @@ public class Job {
 
     public void setWorkerId(UUID workerId) {
         this.workerId = workerId;
+    }
+
+    public Map<String, String> getParameters() {
+        return parameters;
     }
 }

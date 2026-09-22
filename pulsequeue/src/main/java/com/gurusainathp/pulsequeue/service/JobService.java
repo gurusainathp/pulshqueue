@@ -19,7 +19,7 @@ public class JobService {
     }
 
     public Job createJob(CreateJobRequest request) {
-        Job job = jobRepository.save(new Job(request.type()));
+        Job job = jobRepository.save(new Job(request.type(), request.parameters()));
         jobQueueService.enqueueJob(job.getId());
         return job;
     }
