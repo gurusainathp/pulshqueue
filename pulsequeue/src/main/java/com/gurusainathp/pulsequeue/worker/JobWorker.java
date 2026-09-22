@@ -5,6 +5,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import com.gurusainathp.pulsequeue.service.JobService;
 import com.gurusainathp.pulsequeue.model.Job;
 import java.util.UUID;
+import com.gurusainathp.pulsequeue.handler.JobHandlerRegistry;
 
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -13,11 +14,13 @@ public class JobWorker {
     private final UUID workerId;
     private final JobService jobService;
     private final StringRedisTemplate redisTemplate;
+    private final JobHandlerRegistry jobHandlerRegistry;
 
-    public JobWorker(JobService jobService, StringRedisTemplate redisTemplate) {
+    public JobWorker(JobService jobService, StringRedisTemplate redisTemplate, JobHandlerRegistry jobHandlerRegistry) {
         this.workerId = UUID.randomUUID();
         this.jobService = jobService;
         this.redisTemplate = redisTemplate;
+        this.jobHandlerRegistry = jobHandlerRegistry;
     }
 
     @Scheduled(fixedDelay = 10000)
