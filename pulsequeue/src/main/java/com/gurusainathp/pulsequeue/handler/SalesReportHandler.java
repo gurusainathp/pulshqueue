@@ -7,9 +7,16 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import com.gurusainathp.pulsequeue.service.SalesReportService;
 
-@Component 
+@Component
 public class SalesReportHandler implements JobHandler {
+    private final SalesReportService salesReportService;
+
+    public SalesReportHandler(SalesReportService salesReportService) {
+        this.salesReportService = salesReportService;
+    }
+
     @Override
     public String getType() {
         return "SALES_REPORT";
@@ -42,6 +49,6 @@ public class SalesReportHandler implements JobHandler {
 
     @Override
     public String execute(Map<String, String> parameters) throws Exception {
-        return "Sales report generated for period: " + parameters.get("startDate") + " to " + parameters.get("endDate");
+        return salesReportService.generateReport(parameters.get("startDate"), parameters.get("endDate"));
     }
 }

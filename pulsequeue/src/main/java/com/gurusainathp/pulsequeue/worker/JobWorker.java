@@ -6,6 +6,7 @@ import com.gurusainathp.pulsequeue.service.JobService;
 import com.gurusainathp.pulsequeue.model.Job;
 import java.util.UUID;
 import com.gurusainathp.pulsequeue.handler.JobHandlerRegistry;
+import com.gurusainathp.pulsequeue.handler.JobHandler;
 
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -28,28 +29,19 @@ public class JobWorker {
         String jobIdStr = redisTemplate.opsForList().leftPop("job_queue");
         if (jobIdStr != null) {
             Job job = jobService.getJobById(UUID.fromString(jobIdStr));
-            if (job != null) {
-                jobService.startJob(job, workerId);
+            if (job == null) {
+                return;
             }
-            // Simulate job processing
+            
+            jobService.startJob(job, workerId);
+
             try {
-                Thread.sleep(20000); // Simulate processing time
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                if (job != null) {
-                    jobService.failJob(job, "Job processing interrupted");
-                }
-                return;
-            }
-            // Random failure
-            if (Math.random() < 0.7) { // 70% chance of failure
-                if (job != null) {
-                    jobService.failJob(job, "Random failure occurred");
-                }
-                return;
-            }
-            if (job != null) {
-                jobService.completeJob(job);
+                JobHandler handler = jobHandlerRegistry.getHandler(job.getType());
+                handler.validate(job.getParameters());
+                String result = handler.execute(job.getParameters());
+                jobService.completeJob(job, result);
+            } catch (Exception e) {
+                jobService.failJob(job, e.getMessage());
             }
         }
     }
