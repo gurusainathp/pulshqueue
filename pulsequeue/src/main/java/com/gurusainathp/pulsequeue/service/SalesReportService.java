@@ -38,8 +38,7 @@ public class SalesReportService {
                 PageRequest.of(0, 10));
         List<SalesOverTimeSummary> salesOverTime = salesReportRepository.getSalesOverTimeSummary(
                 LocalDate.parse(startDate),
-                LocalDate.parse(endDate),
-                PageRequest.of(0, 10));
+                LocalDate.parse(endDate));
         SalesReport report = new SalesReport(summary, topProducts, topCategories, salesOverTime);
 
         try {

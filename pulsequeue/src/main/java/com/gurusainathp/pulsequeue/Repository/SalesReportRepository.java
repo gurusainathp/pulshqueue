@@ -58,5 +58,5 @@ public interface SalesReportRepository extends JpaRepository<Order, String> {
                         "GROUP BY o.orderDate " +
                         "ORDER BY o.orderDate ASC")
         List<SalesOverTimeSummary> getSalesOverTimeSummary(@Param("startDate") LocalDate startDate,
-                        @Param("endDate") LocalDate endDate, Pageable pageable);
+                        @Param("endDate") LocalDate endDate);
 }
