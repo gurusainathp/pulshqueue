@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+
 import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
@@ -26,6 +27,7 @@ public class Job {
     private Timestamp createdAt;
     private Timestamp startedAt;
     private Timestamp completedAt;
+    @Column(columnDefinition = "TEXT")
     private String result;
     private String error;
     private int attempts;
