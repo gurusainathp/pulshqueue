@@ -7,11 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Component 
 public class JobHandlerRegistry {
-    private final List<JobHandler> jobHandlers;
     private final Map<String, JobHandler> handlerMap;
 
     public JobHandlerRegistry(List<JobHandler> jobHandlers) {
-        this.jobHandlers = jobHandlers;
         this.handlerMap = new HashMap<>();
         for (JobHandler handler : jobHandlers) {
             this.handlerMap.put(handler.getType(), handler);

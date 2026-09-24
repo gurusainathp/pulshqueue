@@ -32,7 +32,7 @@ public class JobWorker {
             if (job == null) {
                 return;
             }
-            
+
             jobService.startJob(job, workerId);
 
             try {

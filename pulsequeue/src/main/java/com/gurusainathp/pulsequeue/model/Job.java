@@ -29,6 +29,7 @@ public class Job {
     private Timestamp completedAt;
     @Column(columnDefinition = "TEXT")
     private String result;
+    @Column(columnDefinition = "TEXT")
     private String error;
     private int attempts;
     private UUID workerId;
