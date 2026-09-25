@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.gurusainathp.pulsequeue.dto.CustomerInfo;
 import com.gurusainathp.pulsequeue.dto.CustomerOrderSummary;
-import com.gurusainathp.pulsequeue.dto.CustomerPurchaseSummary;
+import com.gurusainathp.pulsequeue.dto.PurchaseSummary;
 import com.gurusainathp.pulsequeue.dto.ProductSalesSummary;
 import com.gurusainathp.pulsequeue.model.Customer;
 import java.time.LocalDate;
@@ -31,7 +31,7 @@ public interface CustomerReportRepository extends JpaRepository<Customer, String
             + "JOIN Order o ON oi.orderId = o.orderId "
             + "WHERE o.customerId = :customerId "
             + "AND o.orderDate BETWEEN :startDate AND :endDate")
-    CustomerPurchaseSummary getCustomerPurchaseSummary(@Param("customerId") String customerId,
+    PurchaseSummary getCustomerPurchaseSummary(@Param("customerId") String customerId,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate);
 

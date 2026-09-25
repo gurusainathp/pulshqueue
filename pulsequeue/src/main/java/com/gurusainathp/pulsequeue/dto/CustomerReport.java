@@ -4,11 +4,11 @@ import java.util.List;
 
 public class CustomerReport {
     private CustomerInfo customerInfo;
-    private CustomerPurchaseSummary customerPurchaseSummary;
+    private PurchaseSummary customerPurchaseSummary;
     private List<ProductSalesSummary> topCustomerProducts;
     private List<CustomerOrderSummary> topCustomerOrders;
 
-    public CustomerReport(CustomerInfo customerInfo, CustomerPurchaseSummary customerPurchaseSummary,
+    public CustomerReport(CustomerInfo customerInfo, PurchaseSummary customerPurchaseSummary,
             List<ProductSalesSummary> topCustomerProducts, List<CustomerOrderSummary> topCustomerOrders) {
         this.customerInfo = customerInfo;
         this.customerPurchaseSummary = customerPurchaseSummary;
@@ -20,7 +20,7 @@ public class CustomerReport {
         return customerInfo;
     }
 
-    public CustomerPurchaseSummary getCustomerPurchaseSummary() {
+    public PurchaseSummary getCustomerPurchaseSummary() {
         return customerPurchaseSummary;
     }
 

@@ -2,14 +2,14 @@ package com.gurusainathp.pulsequeue.dto;
 
 import java.math.BigDecimal;
 
-public class CustomerPurchaseSummary {
+public class PurchaseSummary {
     private Long totalOrders;
     private Long totalQuantity;
     private BigDecimal totalSales;
     private BigDecimal totalProfit;
     private BigDecimal averageOrderValue;
 
-    public CustomerPurchaseSummary(Long totalOrders, Long totalQuantity, BigDecimal totalSales, BigDecimal totalProfit,
+    public PurchaseSummary(Long totalOrders, Long totalQuantity, BigDecimal totalSales, BigDecimal totalProfit,
             BigDecimal averageOrderValue) {
         this.totalOrders = totalOrders;
         this.totalQuantity = totalQuantity;

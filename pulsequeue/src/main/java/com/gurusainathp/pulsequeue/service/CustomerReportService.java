@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.gurusainathp.pulsequeue.Repository.CustomerReportRepository;
 import com.gurusainathp.pulsequeue.dto.CustomerInfo;
 import com.gurusainathp.pulsequeue.dto.CustomerOrderSummary;
-import com.gurusainathp.pulsequeue.dto.CustomerPurchaseSummary;
+import com.gurusainathp.pulsequeue.dto.PurchaseSummary;
 import com.gurusainathp.pulsequeue.dto.CustomerReport;
 import com.gurusainathp.pulsequeue.dto.ProductSalesSummary;
 
@@ -28,7 +28,7 @@ public class CustomerReportService {
 
     public String getCustomerReport(String customerId, String startDate, String endDate) {
         CustomerInfo customerInfo = customerReportRepository.getCustomerInfo(customerId);
-        CustomerPurchaseSummary customerPurchaseSummary = customerReportRepository
+        PurchaseSummary customerPurchaseSummary = customerReportRepository
                 .getCustomerPurchaseSummary(customerId, LocalDate.parse(startDate), LocalDate.parse(endDate));
         List<ProductSalesSummary> topCustomerProducts = customerReportRepository.getTopCustomerProducts(customerId,
                 LocalDate.parse(startDate), LocalDate.parse(endDate), PageRequest.of(0, 10));
