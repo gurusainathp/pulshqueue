@@ -1,25 +1,15 @@
-package com.gurusainathp.pulsequeue.model;
+package com.gurusainathp.pulsequeue.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "products")
-public class Product {
-    @Id
+public class ProductInfo {
     private String productId;
-    @Column(name = "product_name")
     private String name;
-    @Column(name = "product_category")
     private String category;
-    @Column(name = "product_subcategory")
     private String subCategory;
     private String brand;
     private String supplier;
 
-    public Product(String productId, String name, String category, String subCategory, String brand, String supplier) {
+    public ProductInfo(String productId, String name, String category, String subCategory, String brand,
+            String supplier) {
         this.productId = productId;
         this.name = name;
         this.category = category;
@@ -29,15 +19,15 @@ public class Product {
     }
 
     public String getProductId() {
-        return this.productId;
+        return productId;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public String getCategory() {
-        return this.category;
+        return category;
     }
 
     public String getSubCategory() {
@@ -51,4 +41,5 @@ public class Product {
     public String getSupplier() {
         return supplier;
     }
+
 }

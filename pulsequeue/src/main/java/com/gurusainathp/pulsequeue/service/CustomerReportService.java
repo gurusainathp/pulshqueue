@@ -41,7 +41,6 @@ public class CustomerReportService {
         try {
             return objectMapper.writeValueAsString(customerReport);
         } catch (JacksonException e) {
-
             throw new RuntimeException("Failed to generate report JSON", e);
         }
     }
