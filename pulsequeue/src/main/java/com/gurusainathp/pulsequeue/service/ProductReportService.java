@@ -3,7 +3,6 @@ package com.gurusainathp.pulsequeue.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.gurusainathp.pulsequeue.Repository.ProductReportRepository;
